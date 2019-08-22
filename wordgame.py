@@ -2,6 +2,7 @@ import random
 
 import pygame
 
+gamemode = 'normal'
 FPS = 60
 W = 600
 H = 400
@@ -24,23 +25,55 @@ words = ['fine', 'test', 'good', 'nope', 'maze', 'dictionary', 'record', 'follow
          'extreme', 'master', 'cupboard', 'tendency', 'minimum', 'weapon', 'front', 'perfume', 'cane', 'length',
          'sunrise', 'general', 'breakfast', 'circulate', 'appreciate', 'question', 'pour', 'blue', 'jean', 'ghost',
          'aloof', 'initiative', 'constituency', 'reasonable', 'background']
+# hard_words = ['television', 'literature', 'laboratory',
+# 'incredible', 'compliance',
+# 'engagement', 'reasonable',
+# 'exaggerate', 'prediction', 'houseplant',
+# 'relaxation', 'correspond']
+# very_easy_words = ['bill','jump','rest','seat','mess','miss','mold','stun','skin','deep','pawn','read','bike']
+
 circs = []
 close = 0
 lastwords = []
 func = 0
 letter = None
-keypressed = 'a'
+keypressed = '$'
 lastletter = 1
 pressed = False
 lastword = None
 lastwordscount = 0
+starting = True
+
+
+def drawtext(x, y, font, size, text):
+    font = pygame.font.SysFont(font, size)
+    text = font.render(text, 1, (0, 100, 0))
+    place = text.get_rect(center=(x, y))
+    sc.blit(text, place)
+
+
+while starting:
+    pygame.display.update()
+    sc.fill(WHITE)
+    drawtext(W / 2, H / 2, 'arial', 70, 'Press E to start')
+    for i in pygame.event.get():
+        if i.type == pygame.QUIT:
+            print('Quitting via exit()')
+            exit()
+        elif i.type == pygame.KEYDOWN:
+            if i.key == pygame.K_ESCAPE:
+                print('Esc is pressed. Quitting via exit()')
+                exit()
+            elif i.key == pygame.K_e:
+                starting = False
+
 
 
 class Circword:
     def __init__(self, word):
         self.word = word
         self.x = x1
-        self.y = random.randint(0, H)
+        self.y = random.randint(20, H - 20)
         self.died = False
         lastwords.append(self.word)
     def update(self, t):
@@ -89,6 +122,8 @@ while inf:
     print('lastletter', lastletter)
     print('lastword', lastword)
     wordlen = len(lastword) - 1
+    if keypressed != '$':
+        print('"', keypressed, '"')
     if keypressed == letter:
         lastwordscount = len(lastwords)
         if lastletter < wordlen and lastwordscount > 0:
@@ -101,7 +136,8 @@ while inf:
             lastwords = lastwords[1:]
             circs = circs[1:]
             # print('The word is complete! Next word is', lastwords[0])
-    #
+    elif keypressed != "$":
+        print('nah')
     #     print('nah')
     #     pressed = False
 
@@ -113,11 +149,12 @@ while inf:
 
 
         elif i.type == pygame.KEYDOWN:
-            if i.key == pygame.K_ESCAPE:
+            if i.key == pygame.K_F12:
                 inf = False
             else:
                 keypressed = i.unicode
                 pressed = True
+print('Game Over!')
 
 while infinity:
     pygame.display.update()
@@ -132,13 +169,15 @@ while infinity:
 
 
     drawtext(W / 2, H / 2, 'arial', 100, 'Game over!')
-    drawtext(W / 2, H / 2 + 70, 'arial', 30, 'Press Esc to exit or E to restart')
+    drawtext(W / 2, H / 2 + 70, 'arial', 30, 'Press Esc to exit')
     pygame.time.delay(1)
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             exit()
         elif i.type == pygame.KEYDOWN:
             if i.key == pygame.K_ESCAPE:
+                print('Esc is pressed. Quitting via exit()')
                 exit()
             elif i.key == pygame.K_e:
+                print('Feature not added yet')
                 pass
