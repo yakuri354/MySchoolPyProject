@@ -1,5 +1,6 @@
-import pygame
 import random
+
+import pygame
 
 FPS = 60
 W = 600
@@ -27,7 +28,8 @@ letter = None
 keypressed = 'a'
 lastletter = 1
 pressed = False
-
+lastword = None
+lastwordscount = 0
 
 
 class Circword:
@@ -35,7 +37,8 @@ class Circword:
         self.word = word
         self.x = x1
         self.y = random.randint(0, H)
-
+        self.died = False
+        lastwords.append(self.word)
     def update(self, t):
         self.x -= t / 1000
         self.x = int(self.x)
@@ -46,45 +49,56 @@ class Circword:
         font = pygame.font.Font(None, 72)
         text = font.render(self.word, 1, (0, 100, 0))
         place = text.get_rect(center=(self.x, self.y))
-        lastwords.append(self.word)
         sc.blit(text, place)
+        if self.x == 0:
+            global inf
+            print("X =", self.x)
+            print(inf)
+            inf = False
 
 
-circ = Circword(random.choice(words))
+# circ = Circword(random.choice(words))
 
 
 while inf:
+    pygame.display.update()
     sc.fill(WHITE)
-    circ.draw(sc)
-    if timetonew < 0:
+    if timetonew <= 0:
         circs.append(Circword(random.choice(words)))
-        timetonew = 6000
+        timetonew = 2000
         letter = 0
     delta = clock.tick(FPS)
-    circ.update(delta)
+    # circ.update(delta)
     timetonew -= delta
     for c in circs:
         c.update(delta)
         c.draw(sc)
-    circls = filter(lambda c: not c.died, circs)
-    pygame.display.update()
-    lastword = lastwords[0]
-    letter = lastword[lastletter]
+    # circs = filter(lambda c: c.died, circs)
+    print('letter', letter)
+    print('lastletter', lastletter)
+    print('lastword', lastword)
+    lastwordscount = len(lastwords)
+    if lastwordscount > 0:
+        lastword = lastwords[0]
+        letter = lastword[lastletter]
     if letter == None:
         letter = 'a'
     print('letter', letter)
     print('lastletter', lastletter)
     print('lastword', lastword)
     if keypressed == letter:
-        if lastletter < 4:
+        lastwordscount = len(lastwords)
+        if lastletter < 3 and lastwordscount > 0:
             lastletter += 1
             print('You pressed the right key!')
-        else:
+        elif lastletter >= 3 and lastwordscount > 0:
             lastletter = 0
-            lastwords.remove(0)
-            circs.remove(0)
-            print('The word is complete! Next word is', lastwords[0])
-    # else:
+            print('lastwords', lastwords)
+            print(lastwordscount)
+            lastwords = lastwords[1:]
+            circs = circs[1:]
+            # print('The word is complete! Next word is', lastwords[0])
+    #
     #     print('nah')
     #     pressed = False
 
