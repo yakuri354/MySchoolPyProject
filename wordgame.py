@@ -7,7 +7,7 @@ W = 600
 H = 400
 WHITE = (255, 255, 255)
 LBLUE = (122, 184, 225)
-
+infinity = True
 
 pygame.init()
 pygame.font.init()
@@ -19,7 +19,11 @@ y2 = 150
 x1 = 545
 r = 46
 inf = True
-words = ['fine', 'test', 'good', 'nope', 'maze']
+words = ['fine', 'test', 'good', 'nope', 'maze', 'dictionary', 'record', 'follow', 'cause', 'voter', 'bold',
+         'residence',
+         'extreme', 'master', 'cupboard', 'tendency', 'minimum', 'weapon', 'front', 'perfume', 'cane', 'length',
+         'sunrise', 'general', 'breakfast', 'circulate', 'appreciate', 'question', 'pour', 'blue', 'jean', 'ghost',
+         'aloof', 'initiative', 'constituency', 'reasonable', 'background']
 circs = []
 close = 0
 lastwords = []
@@ -57,15 +61,13 @@ class Circword:
             inf = False
 
 
-# circ = Circword(random.choice(words))
-
 
 while inf:
     pygame.display.update()
     sc.fill(WHITE)
     if timetonew <= 0:
         circs.append(Circword(random.choice(words)))
-        timetonew = 2000
+        timetonew = 2500
         letter = 0
     delta = clock.tick(FPS)
     # circ.update(delta)
@@ -86,12 +88,13 @@ while inf:
     print('letter', letter)
     print('lastletter', lastletter)
     print('lastword', lastword)
+    wordlen = len(lastword) - 1
     if keypressed == letter:
         lastwordscount = len(lastwords)
-        if lastletter < 3 and lastwordscount > 0:
+        if lastletter < wordlen and lastwordscount > 0:
             lastletter += 1
             print('You pressed the right key!')
-        elif lastletter >= 3 and lastwordscount > 0:
+        elif lastletter >= wordlen and lastwordscount > 0:
             lastletter = 0
             print('lastwords', lastwords)
             print(lastwordscount)
@@ -116,16 +119,26 @@ while inf:
                 keypressed = i.unicode
                 pressed = True
 
-
-while close < 2000:
+while infinity:
     pygame.display.update()
     sc.fill(WHITE)
-    font = pygame.font.SysFont('arial', 100)
-    text = font.render('Game Over', 1, (0, 100, 0))
-    place = text.get_rect(center=(W / 2, H / 2))
-    sc.blit(text, place)
+
+
+    def drawtext(x, y, font, size, text):
+        font = pygame.font.SysFont(font, size)
+        text = font.render(text, 1, (0, 100, 0))
+        place = text.get_rect(center=(x, y))
+        sc.blit(text, place)
+
+
+    drawtext(W / 2, H / 2, 'arial', 100, 'Game over!')
+    drawtext(W / 2, H / 2 + 70, 'arial', 30, 'Press Esc to exit or E to restart')
     pygame.time.delay(1)
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             exit()
-    close += 1
+        elif i.type == pygame.KEYDOWN:
+            if i.key == pygame.K_ESCAPE:
+                exit()
+            elif i.key == pygame.K_e:
+                pass
