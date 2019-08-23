@@ -33,6 +33,9 @@ impossible_words = ['television', 'literature', 'laboratory',
                     'relaxation', 'correspond']
 very_easy_words = ['bill', 'jump', 'rest', 'seat', 'mess', 'miss', 'mold', 'stun', 'skin', 'deep', 'pawn', 'read',
                    'bike']
+rightkeys = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+             'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+             'w', 'x', 'y', 'z')
 circspeed = 1
 circs = []
 close = 0
@@ -47,7 +50,9 @@ lastwordscount = 0
 starting = True
 score = 0
 errors = 0
+currentword = ''
 if gamemode == 5:
+    words = words[:11]
     words = words + impossible_words
 elif gamemode == 1:
     words = words + very_easy_words
@@ -95,7 +100,7 @@ while starting:
     setspeed()
     gmtext()
     drawtext(W / 2, H / 2, 'arial', 70, 'Press E to start')
-    drawtext(W / 2, H / 2 + 100, 'arial', 70, '<' + gamemodetext + '>')
+    drawtext(W / 2, H / 2 + 100, 'arial', 70, '<-' + gamemodetext + '->')
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             print('Quitting via exit()')
@@ -121,7 +126,6 @@ while starting:
                 print('New gamemode is ' + str(gamemode) + ' ' + gamemodetext)
                 drawtext(W / 2, H / 2 + 100, 'arial', 70, '<' + gamemodetext + '>')
 
-
 class Circword:
     def __init__(self, word):
         global circspeed
@@ -138,7 +142,7 @@ class Circword:
 
     def draw(self, sc):
         pygame.draw.circle(sc, LBLUE, (self.x, self.y), r)
-        font = pygame.font.Font(None, 72)
+        font = pygame.font.Font(None, 200 // len(self.word))
         text = font.render(self.word, 1, (0, 100, 0))
         place = text.get_rect(center=(self.x, self.y))
         sc.blit(text, place)
@@ -149,6 +153,23 @@ class Circword:
             inf = False
 
 
+class Bullet():
+    def __init__(self, sc, target, x=W / 2, y=20):
+        self.x = x
+        self.y = y
+        self.t = target
+        self.sc = sc
+
+    def draw(self):
+        pygame.draw.circle(sc, (0, 0, 0), (self.x, self.y), 10)
+
+    def update(self, t):
+        self.x = (self.x - self.t.x) * 10 * (t / 1000)
+        self.y = (self.x - self.t.y) * 10 * (t / 1000)
+        self.x = int(self.x)
+        self.y = int(self.y)
+        if self.t.x - self.x <= 27 or self.t.y - self.y <= 27:
+            pass
 while inf:
     pygame.display.update()
     sc.fill(WHITE)
@@ -184,26 +205,37 @@ while inf:
     print('lastletter', lastletter)
     print('lastword', lastword)
     wordlen = len(lastword) - 1
-    drawtext(W / 2, 20, 'arial', 40, lastword)
-    if keypressed != '$':
+    drawtext(W / 2, 20, 'arial', 40, currentword)
+    if keypressed in rightkeys:
+        currentword += keypressed
+        print(currentword)
         print('"', keypressed, '"')
-    if keypressed == letter:
-        score += 1
-        lastwordscount = len(lastwords)
-        if lastletter < wordlen and lastwordscount > 0:
-            lastletter += 1
-            print('You pressed the right key!')
-        elif lastletter >= wordlen and lastwordscount > 0:
-            lastletter = 0
-            print('lastwords', lastwords)
-            print(lastwordscount)
-            lastwords = lastwords[1:]
-            circs = circs[1:]
-            # print('The word is complete!)s
-    elif keypressed != "$":
-        print('Error!')
-        score -= 2
-        errors += 1
+
+    if keypressed == ' ':
+        if currentword in words:
+            circs = list(filter(lambda c: currentword != c.word, circs))
+            currentword = ''
+
+        else:
+            currentword = ''
+
+    # if keypressed == letter:
+    #     score += 1
+    #     lastwordscount = len(lastwords)
+    #     if lastletter < wordlen and lastwordscount > 0:
+    #         lastletter += 1
+    #         print('You pressed the right key!')
+    #     elif lastletter >= wordlen and lastwordscount > 0:
+    #         lastletter = 0
+    #         print('lastwords', lastwords)
+    #         print(lastwordscount)
+    #         lastwords = lastwords[1:]
+    #         circs = circs[1:]
+    #         # print('The word is complete!)s
+    # elif keypressed != "$":
+    #     print('Error!')
+    #     score -= 2
+    #     errors += 1
 
     #     pressed = False
 
