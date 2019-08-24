@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/wordgame.py" line="225" />
+    <bookmark url="file://$PROJECT_DIR$/wordgame.py" line="196" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58dae60e-e6e3-461d-b8dc-f6612e945ac5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bubble.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bubble2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bubble3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/student.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/student.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wordgame.py" beforeDir="false" afterPath="$PROJECT_DIR$/wordgame.py" afterDir="false" />
     </list>
@@ -20,11 +23,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wordgame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="168" column="16" selection-start-line="168" selection-start-column="16" selection-end-line="168" selection-end-column="16" />
+            <state relative-caret-position="135">
+              <caret line="236" column="33" lean-forward="true" selection-start-line="236" selection-start-column="33" selection-end-line="236" selection-end-column="33" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../.local/lib/python3.5/site-packages/pygame/sprite.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="167" column="8" selection-start-line="167" selection-start-column="8" selection-end-line="167" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -38,7 +50,18 @@
       <find>errorcount</find>
       <find>rand</find>
       <find>gamemode</find>
+      <find>WHITE</find>
+      <find>BLACK</find>
+      <find>lastwords</find>
+      <find>Circword</find>
+      <find>circs</find>
+      <find>circs.app</find>
     </findStrings>
+    <replaceStrings>
+      <replace>dr.Circword</replace>
+      <replace>BLACK</replace>
+      <replace>BGROUND</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -52,15 +75,16 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/deleteme" />
+        <option value="$PROJECT_DIR$/spritetest.py" />
         <option value="$PROJECT_DIR$/wordgame.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="x" value="-410" />
-    <option name="y" value="-42" />
-    <option name="width" value="1400" />
-    <option name="height" value="1056" />
+    <option name="x" value="162" />
+    <option name="y" value="-3" />
+    <option name="width" value="1398" />
+    <option name="height" value="1083" />
   </component>
   <component name="ProjectLevelVcsManager">
     <OptionsSetting value="false" id="Update" />
@@ -90,7 +114,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="full.screen.before.presentation.mode" value="false" />
+    <property name="full.screen.before.presentation.mode" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
@@ -112,7 +136,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.wordgame">
+    <configuration name="spritetest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PyProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/spritetest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="wordgame" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PyProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -137,6 +182,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.wordgame" />
+        <item itemvalue="Python.spritetest" />
       </list>
     </recent_temporary>
   </component>
@@ -193,20 +239,26 @@
       <option name="project" value="LOCAL" />
       <updated>1566489322395</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fri 23, finished day, nothing works, bullets added, but don't work">
+      <created>1566575561878</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1566575561878</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-28" width="1920" height="1108" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="-28" width="1920" height="1108" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16341592" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15972589" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3522388" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4393476" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.34129354" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43880597" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -215,20 +267,20 @@
       <window_info anchor="bottom" id="Inspection Results" order="9" weight="0.32935324" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5002636" side_tool="true" weight="0.32925585" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49973643" weight="0.32925585" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49973643" weight="0.3283582" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32925585" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1091703" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16341592" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3282365" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4393476" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32537314" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43880597" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -237,7 +289,7 @@
       <window_info anchor="bottom" id="Inspection Results" order="9" weight="0.32935324" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5002636" side_tool="true" weight="0.32925585" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49973643" weight="0.32925585" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49973643" weight="0.3283582" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32925585" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -292,7 +344,8 @@
     <MESSAGE value="Thu, 2nd lesson, it finally works! base is done" />
     <MESSAGE value="Thu, 2nd lesson, added some words, game over screen, and fixed some bugs" />
     <MESSAGE value="Thu 22, finished day" />
-    <option name="LAST_COMMIT_MESSAGE" value="Thu 22, finished day" />
+    <MESSAGE value="Fri 23, finished day, nothing works, bullets added, but don't work" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fri 23, finished day, nothing works, bullets added, but don't work" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -345,10 +398,30 @@
     <entry file="file://$PROJECT_DIR$/bubble.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/spritetest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="27" column="15" selection-start-line="27" selection-start-column="15" selection-end-line="27" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bubble2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../.local/lib/python3.5/site-packages/pygame/sprite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="167" column="8" selection-start-line="167" selection-start-column="8" selection-end-line="167" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/wordgame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="168" column="16" selection-start-line="168" selection-start-column="16" selection-end-line="168" selection-end-column="16" />
+        <state relative-caret-position="135">
+          <caret line="236" column="33" lean-forward="true" selection-start-line="236" selection-start-column="33" selection-end-line="236" selection-end-column="33" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
