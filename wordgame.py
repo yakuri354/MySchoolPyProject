@@ -1,5 +1,4 @@
 import random
-from typing import List, Any, Union
 
 import pygame
 
@@ -11,7 +10,9 @@ H = 400
 BGROUND = (68, 36, 52)
 LBLUE = (122, 184, 225)
 TEXTCOLOR = (89, 125, 206)
+CIRCTEXTCOLOR = (2, 164, 211)
 infinity = True
+font1 = 'font.ttf'
 
 pygame.init()
 pygame.font.init()
@@ -67,10 +68,11 @@ impossible_words = ['television', 'literature', 'laboratory',
                     'exaggerate', 'prediction', 'houseplant',
                     'relaxation', 'correspond']
 very_easy_words = ['bill', 'jump', 'rest', 'seat', 'mess', 'miss', 'mold', 'stun', 'skin', 'deep', 'pawn', 'read',
-                   'bike']  # type: List[Union[str, Any]]
+                   'bike']
 rightkeys = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
              'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
              'w', 'x', 'y', 'z')
+random.shuffle(words)
 circspeed = 1
 circs = []
 close = 0
@@ -89,16 +91,13 @@ currentword = ''
 bullet = None
 isdebug = False
 wordnumber = 0
-if gamemode == 5:
-    words = words[:11]
-    words = words + impossible_words
-elif gamemode == 1:
-    words = words[5]
-    words = words + very_easy_words
+lettersentered = 0
+play_time = 0
 
 
-def drawtext(x, y, font, size, text):
-    font = pygame.font.SysFont(font, size)
+def drawtext(x, y, size, text):
+    global font1
+    font = pygame.font.Font(font1, size)
     text = font.render(text, 1, (TEXTCOLOR))
     place = text.get_rect(center=(x, y))
     sc.blit(text, place)
@@ -108,7 +107,7 @@ def gmtext():
     global gamemode
     global gamemodetext
     if gamemode == 1:
-        gamemodetext = 'V3ery Easy'
+        gamemodetext = 'Very Easy'
     elif gamemode == 2:
         gamemodetext = 'Easy'
     elif gamemode == 3:
@@ -123,9 +122,9 @@ def setspeed():
     global gamemode
     global circspeed
     if gamemode == 1:
-        circspeed = 0.75
+        circspeed = 0.6
     elif gamemode == 2:
-        circspeed = 0.85
+        circspeed = 0.6
     elif gamemode == 3:
         circspeed = 1
     elif gamemode == 4:
@@ -139,8 +138,8 @@ while starting:
     sc.fill(BGROUND)
     setspeed()
     gmtext()
-    drawtext(W / 2, H / 2 - 20, 'arial', 70, 'Press E to start')
-    drawtext(W / 2, H / 2 + 100, 'arial', 70, '<-' + gamemodetext + '->')
+    drawtext(W / 2, H / 2 - 20, 70, 'Press E to start')
+    drawtext(W / 2, H / 2 + 100, 70, '<-' + gamemodetext + '->')
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             print('Quitting via exit()')
@@ -160,15 +159,23 @@ while starting:
                     gamemode -= 1
                 gmtext()
                 print('New gamemode is ' + str(gamemode) + ' ' + gamemodetext)
-                drawtext(W / 2, H / 2 + 100, 'arial', 70, '<' + gamemodetext + '>')
+                drawtext(W / 2, H / 2 + 100, 70, '<' + gamemodetext + '>')
 
             elif i.key == pygame.K_RIGHT:
                 if gamemode < 5:
                     gamemode += 1
                 gmtext()
                 print('New gamemode is ' + str(gamemode) + ' ' + gamemodetext)
-                drawtext(W / 2, H / 2 + 100, 'arial', 70, '<' + gamemodetext + '>')
+                drawtext(W / 2, H / 2 + 100, 70, '<' + gamemodetext + '>')
 
+if gamemode == 5:
+    words = words[:11]
+    words = words + impossible_words
+elif gamemode == 1:
+    words = words[:5]
+    print(words)
+    print(very_easy_words)
+    words = words + very_easy_words
 
 class Circword(pygame.sprite.Sprite):
     def __init__(self, word, filename='bubble.png'):
@@ -188,12 +195,11 @@ class Circword(pygame.sprite.Sprite):
 
     def draw(self, sc):
         global isdebug
-        # pygame.draw.circle(sc, LBLUE, (self.x, self.y), r)
         pygame.sprite.Sprite.__init__(self)
         global TEXTCOLOR
         rect = self.image.get_rect(center=(self.x, self.y))
-        font = pygame.font.Font(None, 200 // len(self.word))
-        text = font.render(self.word, 1, (TEXTCOLOR))
+        font = pygame.font.Font('font.ttf', 175 // len(self.word))
+        text = font.render(self.word, 1, (CIRCTEXTCOLOR))
         place = text.get_rect(center=(self.x, self.y))
         sc.blit(self.image, rect)
         sc.blit(text, place)
@@ -216,19 +222,19 @@ class Bullet():
         pygame.draw.circle(sc, (208, 70, 72), (int(self.x), int(self.y)), 10)
 
     def update(self, t):
+        global lettersentered
         global score
         global circs
         self.x += (self.t.x - self.x) * 10 * (t / 1000)
         self.y += (self.t.y - self.y) * 10 * (t / 1000)
-        # self.x = int(self.x)
-        # self.y = int(self.y)
         if self.t.x - self.x <= 2 and self.t.y - self.y <= 2:
             self.died = True
             circs = list(filter(lambda c: self.t.word != c.word, circs))
             circs = list(filter(lambda c: self.t.word != c.word, circs))
-            score += 1
+            score += len(self.t.word)
 
 
+setspeed()
 while inf:
     pygame.display.update()
     sc.fill(BGROUND)
@@ -246,6 +252,7 @@ while inf:
         letter = 0
     delta = clock.tick(FPS)
     timetonew -= delta
+    play_time += delta
 
     for c in circs:
         c.update(delta)
@@ -255,8 +262,7 @@ while inf:
         bullet.draw()
         if bullet.died:
             bullet = None
-    drawtext(W / 7, H / 7, 'arial', 40, str(score))
-    # circs = filter(lambda c: c.died, circs)
+    drawtext(W / 7, H / 7, 40, str(int((score / play_time * 1000 * 60) // 1)))
     print('letter', letter)
     print('lastletter', lastletter)
     print('lastword', lastword)
@@ -264,13 +270,13 @@ while inf:
     if lastwordscount > 0:
         lastword = lastwords[0]
         letter = lastword[lastletter]
-    if letter == None:
+    if letter is None:
         letter = 'a'
     print('letter', letter)
     print('lastletter', lastletter)
     print('lastword', lastword)
     wordlen = len(lastword) - 1
-    drawtext(W / 2, 20, 'arial', 40, currentword)
+    drawtext(W / 2, 20, 40, currentword)
     if keypressed in rightkeys:
         currentword += keypressed
         print(currentword)
@@ -299,30 +305,14 @@ while inf:
             else:
                 keypressed = i.unicode
                 pressed = True
-
 print('Game Over!')
 
 while infinity:
     pygame.display.update()
     sc.fill(BGROUND)
-
-
-    def drawtext(x, y, font, size, text):
-        font = pygame.font.SysFont(font, size)
-        text = font.render(text, 1, (0, 100, 0))
-        place = text.get_rect(center=(x, y))
-        sc.blit(text, place)
-
-
-    drawtext(W / 2, H / 2, 'arial', 100, 'Game over!')
-    drawtext(W / 2, H / 2 + 70, 'arial', 30, 'Press Esc to exit')
-    drawtext(W / 2, H / 2 + 100, 'arial', 25, 'Your score is ' + str(score))
-    # if errors == 0 and score > 1:
-    #     drawtext(W / 2, H / 2 + 150, 'arial', 25, 'You did no errors!')
-    # elif errors == 1:
-    #     drawtext(W / 2, H / 2 + 150, 'arial', 25, 'You did 1 error!')
-    # else:
-    #     drawtext(W / 2, H / 2 + 150, 'arial', 25, 'You did ' + str(errors) + ' errors!')
+    drawtext(W / 2, H / 2, 100, 'Game over!')
+    drawtext(W / 2, H / 2 + 70, 30, 'Press Esc to exit')
+    drawtext(W / 2, H / 2 + 100, 25, 'Your score is ' + str(score))
     pygame.time.delay(1)
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
