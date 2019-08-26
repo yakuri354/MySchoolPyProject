@@ -158,10 +158,11 @@ class Circword(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.word = word
         self.x = x1
-        self.y = random.randint(20, H - 20)
+        self.size = int(size * len(self.word))
+
+        self.y = random.randint(self.size // 2, H - self.size // 2)
         self.died = False
         self.speed = circspeed / len(self.word) * 350
-        self.size = int(size * len(self.word))
         lastwords.append(self.word)
         self.image = pygame.transform.scale(pygame.image.load(filename).convert_alpha(), (self.size, self.size))
 
