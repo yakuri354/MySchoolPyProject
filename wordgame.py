@@ -5,8 +5,8 @@ import pygame
 gamemodetext = 'Normal'
 gamemode = 3
 FPS = 60
-W = 600
-H = 400
+W = 1200
+H = 800
 BGROUND = (68, 36, 52)
 LBLUE = (122, 184, 225)
 TEXTCOLOR = (89, 125, 206)
@@ -21,54 +21,27 @@ clock = pygame.time.Clock()
 timetonew = 0
 y1 = 55
 y2 = 150
-x1 = 545
+x1 = 1150
 r = 46
 inf = True
 words = ['fine', 'test', 'good', 'nope', 'maze', 'dictionary', 'record', 'follow', 'cause', 'voter', 'bold',
          'residence',
          'extreme', 'master', 'cupboard', 'tendency', 'minimum', 'weapon', 'front', 'perfume', 'cane', 'length',
          'sunrise', 'general', 'breakfast', 'circulate', 'appreciate', 'question', 'pour', 'blue', 'jean', 'ghost',
-         'aloof', 'initiative', 'reasonable', 'background', 'sweater',
-         'earthflax', 'copy', 'feeling', 'free', 'mail', 'carrier', 'galaxy', 'election', 'reproduce',
-         'change',
-         'trap',
-         'ticket',
-         'flour',
-         'loan',
-         'place',
-         'despise',
-         'runner',
-         'ranch',
-         'advance',
-         'repetition',
-         'human', 'body',
-         'society',
-         'conventional',
-         'pair',
-         'twist',
+         'aloof', 'initiative', 'reasonable', 'background', 'sweater', 'earthflax', 'copy', 'feeling', 'free', 'mail',
+         'carrier', 'galaxy', 'election', 'reproduce', 'change', 'trap', 'ticket', 'flour', 'loan', 'place', 'despise',
+         'runner', 'ranch', 'advance', 'repetition', 'human', 'body', 'society', 'conventional', 'pair', 'twist',
          'minimize',
-         'balance',
-         'drum',
-         'staircase',
-         'touch',
-         'grant',
-         'electronics',
-         'vigorous',
-         'floor',
-         'effective',
-         'scatter',
-         'yearn',
-         'motorist',
-         'fraud',
-         'swipe'
+         'balance', 'drum', 'staircase', 'touch', 'grant', 'electronics', 'vigorous', 'floor', 'effective', 'scatter',
+         'yearn', 'motorist', 'fraud', 'swipe'
          ]
 impossible_words = ['television', 'literature', 'laboratory',
                     'incredible', 'compliance',
                     'engagement', 'reasonable',
                     'exaggerate', 'prediction', 'houseplant',
                     'relaxation', 'correspond']
-very_easy_words = ['bill', 'jump', 'rest', 'seat', 'mess', 'miss', 'mold', 'stun', 'skin', 'deep', 'pawn', 'read',
-                   'bike']
+very_easy_words = ['bill', 'jump', 'rest', 'seat', 'mess', 'miss',
+                   'mold', 'stun', 'skin', 'deep', 'pawn', 'read', 'bike']
 rightkeys = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
              'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
              'w', 'x', 'y', 'z')
@@ -86,6 +59,7 @@ lastword = None
 lastwordscount = 0
 starting = True
 score = 0
+
 errors = 0
 currentword = ''
 bullet = None
@@ -177,35 +151,37 @@ elif gamemode == 1:
     print(very_easy_words)
     words = words + very_easy_words
 
+
 class Circword(pygame.sprite.Sprite):
-    def __init__(self, word, filename='bubble.png'):
+    def __init__(self, word, size=27, filename='bubble.png'):
         global circspeed
         pygame.sprite.Sprite.__init__(self)
         self.word = word
         self.x = x1
         self.y = random.randint(20, H - 20)
         self.died = False
-        self.speed = circspeed
+        self.speed = circspeed / len(self.word) * 350
+        self.size = int(size * len(self.word))
         lastwords.append(self.word)
-        self.image = pygame.transform.scale(pygame.image.load(filename).convert_alpha(), (100, 100))
+        self.image = pygame.transform.scale(pygame.image.load(filename).convert_alpha(), (self.size, self.size))
 
     def update(self, t):
+
         self.x -= t / 1000 * self.speed
-        self.x = int(self.x)
 
     def draw(self, sc):
         global isdebug
         pygame.sprite.Sprite.__init__(self)
         global TEXTCOLOR
-        rect = self.image.get_rect(center=(self.x, self.y))
-        font = pygame.font.Font('font.ttf', 175 // len(self.word))
+        x = int(self.x)
+        rect = self.image.get_rect(center=(x, self.y))
+        font = pygame.font.Font('font.ttf', self.size // 5)
         text = font.render(self.word, 1, (CIRCTEXTCOLOR))
-        place = text.get_rect(center=(self.x, self.y))
+        place = text.get_rect(center=(x, self.y))
         sc.blit(self.image, rect)
         sc.blit(text, place)
-        if self.x == 0 and isdebug == False:
+        if x <= 10 and isdebug == False:
             global inf
-            print("X =", self.x)
             print(inf)
             inf = False
 
@@ -235,12 +211,23 @@ class Bullet():
 
 
 setspeed()
+if gamemode == 2 or 1:
+    timetonew = 3200
+elif gamemode == 3:
+    timetonew = 2500
+elif gamemode == 4 or 5:
+    timetonew = 2000
 while inf:
+
     pygame.display.update()
     sc.fill(BGROUND)
+    delta = clock.tick(FPS)
+    play_time += delta
+    timetonew -= delta
     if timetonew <= 0:
-        if wordnumber >= len(words):
+        if wordnumber >= int(len(words) - 1):
             random.shuffle(words)
+            wordnumber = 0
         circs.append(Circword((words[wordnumber])))
         wordnumber += 1
         if gamemode == 2 or 1:
@@ -250,9 +237,6 @@ while inf:
         elif gamemode == 4 or 5:
             timetonew = 2000
         letter = 0
-    delta = clock.tick(FPS)
-    timetonew -= delta
-    play_time += delta
 
     for c in circs:
         c.update(delta)
@@ -262,7 +246,7 @@ while inf:
         bullet.draw()
         if bullet.died:
             bullet = None
-    drawtext(W / 7, H / 7, 40, str(int((score / play_time * 1000 * 60) // 1)))
+    drawtext(W / 7, H / 7, 40, str(int((score / play_time * 1000 * 60) // 1)) + 'Char/min')
     print('letter', letter)
     print('lastletter', lastletter)
     print('lastword', lastword)
@@ -275,7 +259,6 @@ while inf:
     print('letter', letter)
     print('lastletter', lastletter)
     print('lastword', lastword)
-    wordlen = len(lastword) - 1
     drawtext(W / 2, 20, 40, currentword)
     if keypressed in rightkeys:
         currentword += keypressed

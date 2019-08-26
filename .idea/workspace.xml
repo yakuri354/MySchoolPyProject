@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/wordgame.py" line="198" />
+    <bookmark url="file://$PROJECT_DIR$/wordgame.py" line="310" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58dae60e-e6e3-461d-b8dc-f6612e945ac5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bubble.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/font.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/copypaste.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gametest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testanime.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/wordgame.py" beforeDir="false" afterPath="$PROJECT_DIR$/wordgame.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wordgame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="262" column="35" lean-forward="true" selection-start-line="262" selection-start-column="35" selection-end-line="262" selection-end-column="35" />
+            <state relative-caret-position="476">
+              <caret line="183" column="22" selection-start-line="183" selection-start-column="22" selection-end-line="183" selection-end-column="22" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -50,6 +51,7 @@
       <find>score</find>
       <find>timer</find>
       <find>drawtext</find>
+      <find>wordlen</find>
     </findStrings>
     <replaceStrings>
       <replace>dr.Circword</replace>
@@ -75,7 +77,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="162" />
     <option name="y" value="-3" />
     <option name="width" value="1398" />
@@ -153,6 +155,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="testanime" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PyProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testanime.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="wordgame" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PyProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -177,6 +200,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.wordgame" />
+        <item itemvalue="Python.testanime" />
         <item itemvalue="Python.spritetest" />
       </list>
     </recent_temporary>
@@ -248,19 +272,26 @@
       <option name="project" value="LOCAL" />
       <updated>1566661968290</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Sun 25, finished">
+      <created>1566747760269</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1566747760269</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-28" width="1920" height="1108" extended-state="6" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15972589" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16539301" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49920928" visible="true" weight="0.34129354" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49920928" visible="true" weight="0.34964323" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43880597" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -349,7 +380,8 @@
     <MESSAGE value="Thu 22, finished day" />
     <MESSAGE value="Fri 23, finished day, nothing works, bullets added, but don't work" />
     <MESSAGE value="Sat 24, fixed colors, almost done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sat 24, fixed colors, almost done" />
+    <MESSAGE value="Sun 25, finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sun 25, finished" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -411,8 +443,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wordgame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="262" column="35" lean-forward="true" selection-start-line="262" selection-start-column="35" selection-end-line="262" selection-end-column="35" />
+        <state relative-caret-position="476">
+          <caret line="183" column="22" selection-start-line="183" selection-start-column="22" selection-end-line="183" selection-end-column="22" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
